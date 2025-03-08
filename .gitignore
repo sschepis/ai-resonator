@@ -1,0 +1,5 @@
+__pycache__
+.gradio/
+.history/
+.env
+resonance_memory.json
