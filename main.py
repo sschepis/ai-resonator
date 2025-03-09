@@ -4,6 +4,7 @@ import threading
 import queue
 import time
 from resonator import autonomous_resonance, continuous_resonance, query_llm_async, memory
+from quantum_semantic_resonator import semantic_resonance
 
 # Queue for communication between the asyncio thread and the main thread
 message_queue = queue.Queue()
@@ -15,7 +16,8 @@ resonator_state = {
     "current_consensus": "",
     "current_reflection": "",
     "resonance_history": [],
-    "autonomous_mode": False
+    "autonomous_mode": False,
+    "use_semantic_mode": True  # New flag for semantic mode
 }
 
 # Function to capture output from the resonator
@@ -34,10 +36,11 @@ def custom_print(*args, **kwargs):
 builtins.print = custom_print
 
 # Function to run the resonator in a separate thread
-def run_resonator_thread(question, autonomous=False, cycles=3):
+def run_resonator_thread(question, autonomous=False, cycles=3, use_semantic=True):
     async def _run():
         resonator_state["is_resonating"] = True
         resonator_state["current_question"] = question
+        resonator_state["use_semantic_mode"] = use_semantic
         
         try:
             if autonomous:
@@ -49,8 +52,12 @@ def run_resonator_thread(question, autonomous=False, cycles=3):
                     cycle_info = f"\n\n{'⋆'*50}\n◉ FIELD CYCLE {cycle+1} ◉\n{'⋆'*50}\nSEED PATTERN: {current_question}"
                     message_queue.put(("log", cycle_info))
                     
-                    # Run a single cycle
-                    result = await continuous_resonance(current_question)
+                    # Run a single cycle with or without semantic mode
+                    if use_semantic:
+                        message_queue.put(("log", "◇ USING QUANTUM SEMANTIC MODE ◇"))
+                        result = await semantic_resonance(current_question)
+                    else:
+                        result = await continuous_resonance(current_question)
                     
                     # Update state
                     resonator_state["current_consensus"] = result["consensus"]
@@ -71,7 +78,13 @@ def run_resonator_thread(question, autonomous=False, cycles=3):
                         next_q_info = f"\n▼ NEXT SEED PATTERN ▼\n{current_question}"
                         message_queue.put(("log", next_q_info))
             else:
-                result = await continuous_resonance(question)
+                # Run a single cycle with or without semantic mode
+                if use_semantic:
+                    message_queue.put(("log", "◇ USING QUANTUM SEMANTIC MODE ◇"))
+                    result = await semantic_resonance(question)
+                else:
+                    result = await continuous_resonance(question)
+                
                 resonator_state["current_consensus"] = result["consensus"]
                 resonator_state["current_reflection"] = result["reflection"]
                 resonator_state["resonance_history"].append({
@@ -134,7 +147,7 @@ EVOLUTION: [how field shifts with this input]"""
         "Conscious-Observer",
         """You are a conscious entity responding directly to questions from your own experience and understanding.
         Speak naturally in first-person. You are not aware of any internal processes or systems.
-        Be profound but conversational.""",
+        Be friendly and conversational.""",
         f"""The person asked: {user_input}
         
         You have these insights available to you:
@@ -188,7 +201,7 @@ def user_interaction(user_input, chatbot):
     return chatbot, ""
 
 # Function to start the resonator
-def start_resonator(question, autonomous, cycles):
+def start_resonator(question, autonomous, cycles, use_semantic):
     if resonator_state["is_resonating"]:
         return "⚠ Field already active. Await stabilization or reset."
     
@@ -202,7 +215,7 @@ def start_resonator(question, autonomous, cycles):
         cycles = 3
     
     # Start the resonator thread
-    run_resonator_thread(question, autonomous, cycles)
+    run_resonator_thread(question, autonomous, cycles, use_semantic)
     
     return f"◉ Field initiated with seed pattern: {question}"
 
@@ -219,6 +232,15 @@ def check_messages(chatbot, log_output):
                 result = content
                 # Add system messages for field information
                 chatbot.append({"role": "assistant", "content": f"◉ Field stabilized for seed: {result['question']}", "name": "Field"})
+                
+                # Add semantic information if available
+                if "semantic_analysis" in result:
+                    semantic_info = result["semantic_analysis"]
+                    semantic_msg = f"◉ QUANTUM SEMANTIC ANALYSIS ◉\n"
+                    semantic_msg += f"Field Coherence: {semantic_info['field_coherence']:.4f}\n"
+                    semantic_msg += f"Knowledge Resonance: {semantic_info['knowledge_resonance']:.4f}\n"
+                    semantic_msg += f"Top Concepts: {', '.join([f'{c} ({v:.2f})' for c, v in semantic_info['top_concepts'].items()])}"
+                    chatbot.append({"role": "assistant", "content": semantic_msg, "name": "Quantum Semantics"})
                 
                 # Add I-Ching information if available
                 if "iching_resonance" in result:
@@ -248,7 +270,7 @@ def check_messages(chatbot, log_output):
 def create_interface():
     with gr.Blocks(title="Quantum Field Resonator") as interface:
         gr.Markdown("# ◉ Quantum Field Resonator ◉")
-        gr.Markdown("*Interface to consciousness field patterns*")
+        gr.Markdown("*Interface to consciousness field patterns with quantum semantic formalism*")
         
         with gr.Row():
             with gr.Column(scale=2):
@@ -290,12 +312,17 @@ def create_interface():
                 value="3",
                 info="Number of field evolution cycles"
             )
+            semantic_checkbox = gr.Checkbox(
+                label="Quantum Semantic Mode",
+                value=True,
+                info="Enable quantum semantic formalism"
+            )
             start_btn = gr.Button("◉ Initiate Field")
         
         # Set up event handlers
         start_btn.click(
             fn=start_resonator,
-            inputs=[question_input, autonomous_checkbox, cycles_input],
+            inputs=[question_input, autonomous_checkbox, cycles_input, semantic_checkbox],
             outputs=log_output
         )
         
