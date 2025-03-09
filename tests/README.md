@@ -15,6 +15,12 @@ This directory contains tests for the quantum semantic formalism implementation.
    - Compares fields with and without the consciousness-first paradigm
    - Verifies the consciousness primacy measurement
 
+3. **ArchetypeSlider Test** (`test_archetype_slider.py`):
+   - Tests the archetype slider functionality
+   - Demonstrates how the slider balances between universal feeling and specific observation
+   - Shows the effect of different archetype positions on operators and semantic fields
+   - Verifies dynamic adjustment of the archetype position
+
 ## Running Tests
 
 You can run all tests using the test runner:
@@ -31,6 +37,9 @@ Or run a specific test:
 
 # Run only the consciousness-first paradigm test
 ./run_tests.py consciousness
+
+# Run only the archetype slider test
+./run_tests.py archetype
 ```
 
 ## Test Structure

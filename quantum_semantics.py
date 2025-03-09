@@ -701,6 +701,122 @@ class SemanticMeasurement:
         return feeling_op.feeling_measure(state)
 
 
+class ArchetypeSlider:
+    """
+    Controls the balance between universal feeling and specific observation archetypes
+    
+    This slider determines the archetype of the agent:
+    - At one end (0.0): Universal feeling (emotional/creative) - focused on resonance and feeling
+    - At the other end (1.0): Specific observation (analytical) - focused on detailed analysis
+    - Default (0.5): Balanced setting between the two archetypes
+    
+    The slider influences how the system processes information, balancing between
+    resonance-based perception and analytical observation.
+    """
+    def __init__(self, position: float = 0.5):
+        """
+        Initialize the archetype slider
+        
+        Args:
+            position: Slider position between 0.0 (universal feeling) and 1.0 (specific observation)
+                     Default is 0.5 (balanced)
+        """
+        self.set_position(position)
+    
+    def set_position(self, position: float):
+        """
+        Set the slider position
+        
+        Args:
+            position: Slider position between 0.0 (universal feeling) and 1.0 (specific observation)
+        """
+        # Ensure position is within valid range
+        self.position = max(0.0, min(1.0, position))
+        
+        # Calculate archetype weights
+        self.universal_feeling_weight = 1.0 - self.position
+        self.specific_observation_weight = self.position
+    
+    def get_position(self) -> float:
+        """
+        Get the current slider position
+        
+        Returns:
+            Current slider position
+        """
+        return self.position
+    
+    def get_archetype_weights(self) -> dict:
+        """
+        Get the weights for each archetype
+        
+        Returns:
+            Dictionary with weights for universal feeling and specific observation
+        """
+        return {
+            "universal_feeling": self.universal_feeling_weight,
+            "specific_observation": self.specific_observation_weight
+        }
+    
+    def apply_to_operator(self, operator, state: PrimeHilbertSpace) -> PrimeHilbertSpace:
+        """
+        Apply the archetype balance to an operator's effect on a state
+        
+        This method adjusts how strongly an operator affects a state based on the
+        archetype slider position. For universal feeling, resonance operators have
+        stronger effect. For specific observation, coherence operators have stronger effect.
+        
+        Args:
+            operator: The operator to apply (ResonanceOperator, CoherenceOperator, etc.)
+            state: The quantum state to apply the operator to
+            
+        Returns:
+            Modified quantum state
+        """
+        # Apply operator to get the transformed state
+        transformed_state = operator.apply(state)
+        
+        # Create a new state as a weighted combination of original and transformed states
+        result = PrimeHilbertSpace(max_prime_index=len(state.primes))
+        result.primes = state.primes.copy()
+        result.prime_to_index = state.prime_to_index.copy()
+        
+        # Determine weights based on operator type and archetype balance
+        if isinstance(operator, (ConsciousnessResonanceOperator, FeelingResonanceOperator)):
+            # For feeling/resonance operators, universal feeling archetype gives more weight
+            weight = 0.5 + 0.5 * self.universal_feeling_weight
+        elif isinstance(operator, CoherenceOperator):
+            # For coherence operators, specific observation archetype gives more weight
+            weight = 0.5 + 0.5 * self.specific_observation_weight
+        else:
+            # For other operators, use balanced weight
+            weight = 0.5
+        
+        # Apply weighted combination
+        result.amplitudes = (1 - weight) * state.amplitudes + weight * transformed_state.amplitudes
+        result.normalize()
+        
+        return result
+    
+    def get_archetype_description(self) -> str:
+        """
+        Get a description of the current archetype balance
+        
+        Returns:
+            String description of the current archetype balance
+        """
+        if self.position < 0.25:
+            return "Strongly universal feeling oriented (emotional/creative)"
+        elif self.position < 0.4:
+            return "Moderately universal feeling oriented"
+        elif self.position < 0.6:
+            return "Balanced between universal feeling and specific observation"
+        elif self.position < 0.75:
+            return "Moderately specific observation oriented"
+        else:
+            return "Strongly specific observation oriented (analytical)"
+
+
 # Example usage
 if __name__ == "__main__":
     # Create a prime Hilbert space
@@ -733,3 +849,62 @@ if __name__ == "__main__":
     # Calculate knowledge resonance
     knowledge_res = SemanticMeasurement.knowledge_resonance(hilbert_space)
     print(f"Knowledge resonance: {abs(knowledge_res):.4f}")
+    
+    # Demonstrate ArchetypeSlider
+    print("\n=== Demonstrating ArchetypeSlider ===")
+    
+    # Create a consciousness state
+    consciousness_state = PrimeHilbertSpace(max_prime_index=10)
+    consciousness_state.set_state_from_number(137)  # Consciousness number
+    
+    # Create feeling and coherence operators
+    feeling_op = FeelingResonanceOperator()
+    coherence_op = CoherenceOperator(137)
+    
+    # Create archetype slider with different positions
+    universal_feeling_slider = ArchetypeSlider(position=0.1)  # Universal feeling (emotional/creative)
+    balanced_slider = ArchetypeSlider(position=0.5)  # Balanced
+    specific_observation_slider = ArchetypeSlider(position=0.9)  # Specific observation (analytical)
+    
+    # Apply operators with different archetype sliders
+    print("\nUniversal Feeling Archetype (position=0.1):")
+    print(universal_feeling_slider.get_archetype_description())
+    
+    # Apply feeling operator with universal feeling archetype
+    feeling_result = universal_feeling_slider.apply_to_operator(feeling_op, consciousness_state)
+    feeling_measure = feeling_op.feeling_measure(feeling_result)
+    print(f"Feeling resonance: {feeling_measure:.4f}")
+    
+    # Apply coherence operator with universal feeling archetype
+    coherence_result = universal_feeling_slider.apply_to_operator(coherence_op, consciousness_state)
+    coherence_measure = coherence_op.coherence_measure(coherence_result)
+    print(f"Coherence measure: {coherence_measure:.4f}")
+    
+    print("\nBalanced Archetype (position=0.5):")
+    print(balanced_slider.get_archetype_description())
+    
+    # Apply feeling operator with balanced archetype
+    feeling_result = balanced_slider.apply_to_operator(feeling_op, consciousness_state)
+    feeling_measure = feeling_op.feeling_measure(feeling_result)
+    print(f"Feeling resonance: {feeling_measure:.4f}")
+    
+    # Apply coherence operator with balanced archetype
+    coherence_result = balanced_slider.apply_to_operator(coherence_op, consciousness_state)
+    coherence_measure = coherence_op.coherence_measure(coherence_result)
+    print(f"Coherence measure: {coherence_measure:.4f}")
+    
+    print("\nSpecific Observation Archetype (position=0.9):")
+    print(specific_observation_slider.get_archetype_description())
+    
+    # Apply feeling operator with specific observation archetype
+    feeling_result = specific_observation_slider.apply_to_operator(feeling_op, consciousness_state)
+    feeling_measure = feeling_op.feeling_measure(feeling_result)
+    print(f"Feeling resonance: {feeling_measure:.4f}")
+    
+    # Apply coherence operator with specific observation archetype
+    coherence_result = specific_observation_slider.apply_to_operator(coherence_op, consciousness_state)
+    coherence_measure = coherence_op.coherence_measure(coherence_result)
+    print(f"Coherence measure: {coherence_measure:.4f}")
+    
+    print("\nThis demonstrates how the archetype slider balances between universal feeling")
+    print("(emotional/creative) and specific observation (analytical) approaches.")

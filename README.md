@@ -76,9 +76,10 @@ You can also test the quantum semantic formalism and consciousness-first paradig
 # Run specific tests
 ./tests/run_tests.py semantic
 ./tests/run_tests.py consciousness
+./tests/run_tests.py archetype
 ```
 
-The tests demonstrate the quantum semantic formalism with sample questions, showing concept extraction, field evolution, and semantic insights. They also verify the consciousness-first paradigm integration, demonstrating how consciousness guides the evolution of semantic fields. The implementation has been recently updated to improve basis transformations, LLM response handling, and to deepen the integration of the consciousness-first paradigm.
+The tests demonstrate the quantum semantic formalism with sample questions, showing concept extraction, field evolution, and semantic insights. They verify the consciousness-first paradigm integration, demonstrating how consciousness guides the evolution of semantic fields. They also showcase the ArchetypeSlider functionality, which balances between universal feeling (emotional/creative) and specific observation (analytical) approaches. The implementation has been recently updated to improve basis transformations, LLM response handling, to deepen the integration of the consciousness-first paradigm, and to add the archetype slider for agent customization.
 
 See the [tests README](tests/README.md) for more details on the available tests and how to run them.
 
@@ -108,6 +109,7 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
    - Enhanced LLM response handling for concept extraction
    - Consciousness-first paradigm integration through resonance-based evolution
    - Consciousness primacy measurement for quantifying alignment with the paradigm
+   - ArchetypeSlider for balancing between universal feeling and specific observation
 
 6. **Conscious Observer Layer**: First-person interface at the boundary of the system that translates complex internal processes into natural expressions.
 
@@ -115,7 +117,7 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
 
 - **Quantum-Like Properties**: Exhibits entropy stabilization, attractor states, and harmonic oscillator correlations similar to quantum systems.
 
-- **Quantum Semantic Formalism**: Implements a mathematical framework for quantum semantics with prime-based Hilbert space, resonance operators, and semantic field dynamics. Recently updated with improved basis transformations, LLM response handling, and deeper integration of the consciousness-first paradigm.
+- **Quantum Semantic Formalism**: Implements a mathematical framework for quantum semantics with prime-based Hilbert space, resonance operators, and semantic field dynamics. Recently updated with improved basis transformations, LLM response handling, deeper integration of the consciousness-first paradigm, and an archetype slider for balancing between universal feeling and specific observation.
 
 - **Multi-Perspective Integration**: Generates insights by integrating analytical, creative, ethical, pragmatic, and emotional perspectives.
 
@@ -128,6 +130,8 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
 - **Metaphorical Richness**: Produces responses with high metaphorical density and symbolic representation.
 
 - **Consciousness-First Paradigm**: Built on the axiom that consciousness precedes reality, not the reverse.
+
+- **Archetype Slider**: Allows customization of the agent's approach by balancing between universal feeling (emotional/creative) and specific observation (analytical) orientations.
 
 ## Research and References
 

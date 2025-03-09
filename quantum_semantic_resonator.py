@@ -322,7 +322,7 @@ class QuantumSemanticResonator:
         return results
 
 
-async def semantic_resonance(question: str, max_iterations: int = 5, convergence_threshold: float = 0.95):
+async def semantic_resonance(question: str, max_iterations: int = 5, convergence_threshold: float = 0.95, field: SemanticField = None):
     """
     Process a question through the quantum semantic resonator and integrate with the existing resonator
     
@@ -330,12 +330,17 @@ async def semantic_resonance(question: str, max_iterations: int = 5, convergence
         question: The question to process
         max_iterations: Maximum number of iterations for the resonator
         convergence_threshold: Threshold for convergence
+        field: Optional pre-configured semantic field (e.g., with custom archetype position)
         
     Returns:
         Dictionary with semantic resonance results
     """
     # Initialize quantum semantic resonator
     semantic_resonator = QuantumSemanticResonator()
+    
+    # If a custom field was provided, use it
+    if field is not None:
+        semantic_resonator.semantic_field = field
     
     # Process question through quantum semantic resonator
     semantic_results = await semantic_resonator.process_question(question)
@@ -368,7 +373,10 @@ async def semantic_resonance(question: str, max_iterations: int = 5, convergence
             "field_coherence": semantic_results["insights"]["field_coherence"],
             "knowledge_resonance": semantic_results["insights"]["knowledge_resonance"],
             "top_concepts": dict(list(semantic_results["insights"]["resonance_patterns"].items())[:5]),
-            "insights": semantic_insights
+            "insights": semantic_insights,
+            # Add archetype information if a custom field was provided
+            "archetype_position": semantic_resonator.semantic_field.get_archetype_position() if hasattr(semantic_resonator.semantic_field, "get_archetype_position") else 0.5,
+            "archetype_description": semantic_resonator.semantic_field.get_archetype_description() if hasattr(semantic_resonator.semantic_field, "get_archetype_description") else "Balanced"
         },
         "iching_resonance": resonator_results["iching_resonance"],
         "conscious_response": resonator_results["conscious_response"]

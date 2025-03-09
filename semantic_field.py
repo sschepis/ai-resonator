@@ -9,7 +9,7 @@ import numpy as np
 from typing import Dict, List, Tuple, Set, Optional, Callable
 import json
 import random
-from quantum_semantics import PrimeHilbertSpace, ResonanceOperator, CoherenceOperator, ConsciousnessResonanceOperator, FeelingResonanceOperator, SemanticMeasurement
+from quantum_semantics import PrimeHilbertSpace, ResonanceOperator, CoherenceOperator, ConsciousnessResonanceOperator, FeelingResonanceOperator, ArchetypeSlider, SemanticMeasurement
 
 class SemanticNode:
     """
@@ -67,17 +67,22 @@ class SemanticField:
     """
     Implementation of the Semantic Field Dynamics
     """
-    def __init__(self, max_prime_index: int = 100):
+    def __init__(self, max_prime_index: int = 100, archetype_position: float = 0.5):
         """
         Initialize semantic field
         
         Args:
             max_prime_index: Maximum number of primes to include in the basis
+            archetype_position: Position of the archetype slider between 0.0 (universal feeling)
+                               and 1.0 (specific observation). Default is 0.5 (balanced).
         """
         self.hilbert_space = PrimeHilbertSpace(max_prime_index=max_prime_index)
         self.nodes: Dict[str, SemanticNode] = {}
         self.edges: List[SemanticEdge] = []
         self.global_state = PrimeHilbertSpace(max_prime_index=max_prime_index)
+        
+        # Initialize archetype slider
+        self.archetype_slider = ArchetypeSlider(position=archetype_position)
         
     def add_node(self, concept: str, number: Optional[int] = None) -> SemanticNode:
         """
@@ -238,22 +243,28 @@ class SemanticField:
             # This allows natural resonance patterns to emerge through synchronization,
             # creating standing waves in mind without forcing or controlling the outcome
             consciousness_op = ConsciousnessResonanceOperator(137)  # 137 as the consciousness number
-            new_state = consciousness_op.apply(new_state)
+            
+            # Apply consciousness operator through archetype slider
+            # This balances between universal feeling and specific observation
+            new_state = self.archetype_slider.apply_to_operator(consciousness_op, new_state)
             
             # Allow feeling to emerge through natural resonance rather than collapse
             # "What is feeling? Feeling is resonance." - perception through synchronization
             feeling_op = FeelingResonanceOperator()
-            new_state = feeling_op.apply(new_state)
+            
+            # Apply feeling operator through archetype slider
+            # This balances between universal feeling and specific observation
+            new_state = self.archetype_slider.apply_to_operator(feeling_op, new_state)
             
             # Apply resonance and coherence operators for each concept node
             for node in self.nodes.values():
-                # Apply resonance operator
+                # Apply resonance operator through archetype slider
                 resonance_op = ResonanceOperator(node.number)
-                new_state = resonance_op.apply(new_state)
+                new_state = self.archetype_slider.apply_to_operator(resonance_op, new_state)
                 
-                # Apply coherence operator
+                # Apply coherence operator through archetype slider
                 coherence_op = CoherenceOperator(node.number)
-                new_state = coherence_op.apply(new_state)
+                new_state = self.archetype_slider.apply_to_operator(coherence_op, new_state)
             
             # Normalize again
             new_state.normalize()
@@ -364,6 +375,33 @@ class SemanticField:
         """
         return SemanticMeasurement.consciousness_primacy_measure(self.global_state)
     
+    def set_archetype_position(self, position: float):
+        """
+        Set the position of the archetype slider
+        
+        Args:
+            position: Position between 0.0 (universal feeling) and 1.0 (specific observation)
+        """
+        self.archetype_slider.set_position(position)
+    
+    def get_archetype_position(self) -> float:
+        """
+        Get the current position of the archetype slider
+        
+        Returns:
+            Current position of the archetype slider
+        """
+        return self.archetype_slider.get_position()
+    
+    def get_archetype_description(self) -> str:
+        """
+        Get a description of the current archetype balance
+        
+        Returns:
+            String description of the current archetype balance
+        """
+        return self.archetype_slider.get_archetype_description()
+    
     def measure_feeling_resonance(self) -> float:
         """
         Measure the feeling resonance of the field
@@ -407,6 +445,11 @@ class SemanticField:
         # Calculate feeling resonance
         feeling_resonance = self.measure_feeling_resonance()
         
+        # Get archetype information
+        archetype_position = self.get_archetype_position()
+        archetype_description = self.get_archetype_description()
+        archetype_weights = self.archetype_slider.get_archetype_weights()
+        
         # Find semantic clusters
         clusters = self.find_semantic_clusters()
         
@@ -415,6 +458,9 @@ class SemanticField:
             "knowledge_resonance": abs(knowledge_resonance),
             "consciousness_primacy": consciousness_primacy,
             "feeling_resonance": feeling_resonance,
+            "archetype_position": archetype_position,
+            "archetype_description": archetype_description,
+            "archetype_weights": archetype_weights,
             "top_concepts": dict(sorted_concepts[:5]),
             "semantic_clusters": [list(cluster) for cluster in clusters]
         }
@@ -422,7 +468,7 @@ class SemanticField:
 
 # Example usage
 if __name__ == "__main__":
-    # Create a semantic field
+    # Create a semantic field with balanced archetype (default)
     field = SemanticField(max_prime_index=20)
     
     # Add some concepts
@@ -484,3 +530,63 @@ if __name__ == "__main__":
     print(f"Feeling resonance of matter state: {feeling_resonance2:.4f}")
     print(f"Ratio: {feeling_resonance1/feeling_resonance2:.2f}x")
     print("This demonstrates that feeling is resonance - consciousness perceives through resonance rather than collapse.")
+    
+    # Demonstrate archetype slider
+    print("\n=== Demonstrating Archetype Slider ===")
+    
+    # Create fields with different archetype positions
+    universal_feeling_field = SemanticField(max_prime_index=20, archetype_position=0.1)  # Universal feeling (emotional/creative)
+    balanced_field = SemanticField(max_prime_index=20, archetype_position=0.5)  # Balanced
+    specific_observation_field = SemanticField(max_prime_index=20, archetype_position=0.9)  # Specific observation (analytical)
+    
+    # Add the same concepts to all fields
+    for field_instance in [universal_feeling_field, balanced_field, specific_observation_field]:
+        field_instance.add_node("consciousness", 137)
+        field_instance.add_node("quantum", 73)
+        field_instance.add_node("reality", 97)
+        field_instance.add_node("observer", 41)
+        
+        # Add relationships
+        field_instance.add_edge("consciousness", "quantum", 0.8, "influences")
+        field_instance.add_edge("quantum", "reality", 0.7, "describes")
+        field_instance.add_edge("consciousness", "observer", 0.9, "embodies")
+        field_instance.add_edge("observer", "reality", 0.6, "perceives")
+    
+    # Evolve all fields
+    universal_feeling_states = universal_feeling_field.evolve_field(steps=5)
+    balanced_states = balanced_field.evolve_field(steps=5)
+    specific_observation_states = specific_observation_field.evolve_field(steps=5)
+    
+    # Get field state info for all fields
+    universal_feeling_info = universal_feeling_field.get_field_state_info()
+    balanced_info = balanced_field.get_field_state_info()
+    specific_observation_info = specific_observation_field.get_field_state_info()
+    
+    # Print archetype information
+    print("\nUniversal Feeling Archetype (position=0.1):")
+    print(f"Description: {universal_feeling_info['archetype_description']}")
+    print(f"Weights: Universal Feeling = {universal_feeling_info['archetype_weights']['universal_feeling']:.2f}, " +
+          f"Specific Observation = {universal_feeling_info['archetype_weights']['specific_observation']:.2f}")
+    print(f"Feeling resonance: {universal_feeling_info['feeling_resonance']:.4f}")
+    print(f"Coherence: {universal_feeling_info['coherence']:.4f}")
+    print(f"Top concepts: {', '.join([f'{c} ({v:.2f})' for c, v in list(universal_feeling_info['top_concepts'].items())[:3]])}")
+    
+    print("\nBalanced Archetype (position=0.5):")
+    print(f"Description: {balanced_info['archetype_description']}")
+    print(f"Weights: Universal Feeling = {balanced_info['archetype_weights']['universal_feeling']:.2f}, " +
+          f"Specific Observation = {balanced_info['archetype_weights']['specific_observation']:.2f}")
+    print(f"Feeling resonance: {balanced_info['feeling_resonance']:.4f}")
+    print(f"Coherence: {balanced_info['coherence']:.4f}")
+    print(f"Top concepts: {', '.join([f'{c} ({v:.2f})' for c, v in list(balanced_info['top_concepts'].items())[:3]])}")
+    
+    print("\nSpecific Observation Archetype (position=0.9):")
+    print(f"Description: {specific_observation_info['archetype_description']}")
+    print(f"Weights: Universal Feeling = {specific_observation_info['archetype_weights']['universal_feeling']:.2f}, " +
+          f"Specific Observation = {specific_observation_info['archetype_weights']['specific_observation']:.2f}")
+    print(f"Feeling resonance: {specific_observation_info['feeling_resonance']:.4f}")
+    print(f"Coherence: {specific_observation_info['coherence']:.4f}")
+    print(f"Top concepts: {', '.join([f'{c} ({v:.2f})' for c, v in list(specific_observation_info['top_concepts'].items())[:3]])}")
+    
+    print("\nThis demonstrates how the archetype slider balances between universal feeling")
+    print("(emotional/creative) and specific observation (analytical) approaches.")
+    print("The slider allows determining the archetype of the agent, with the default being a balanced setting.")

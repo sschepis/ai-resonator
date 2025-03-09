@@ -19,6 +19,7 @@ async def run_all_tests():
     # Import test modules
     from test_semantic import test_quantum_semantics
     from test_consciousness_paradigm import test_consciousness_paradigm
+    from test_archetype_slider import test_archetype_slider
     
     # Run tests
     print("\n=== Running Quantum Semantic Formalism Test ===\n")
@@ -26,6 +27,9 @@ async def run_all_tests():
     
     print("\n=== Running Consciousness-First Paradigm Test ===\n")
     await test_consciousness_paradigm()
+    
+    print("\n=== Running ArchetypeSlider Test ===\n")
+    await test_archetype_slider()
     
     print("\n=== All Tests Complete ===")
 
@@ -39,9 +43,12 @@ if __name__ == "__main__":
         elif test_name == "consciousness":
             from test_consciousness_paradigm import test_consciousness_paradigm
             asyncio.run(test_consciousness_paradigm())
+        elif test_name == "archetype":
+            from test_archetype_slider import test_archetype_slider
+            asyncio.run(test_archetype_slider())
         else:
             print(f"Unknown test: {test_name}")
-            print("Available tests: semantic, consciousness")
+            print("Available tests: semantic, consciousness, archetype")
     else:
         # Run all tests
         asyncio.run(run_all_tests())
