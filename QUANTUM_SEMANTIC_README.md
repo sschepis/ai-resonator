@@ -6,6 +6,23 @@ This document provides an overview of the quantum semantic formalism implementat
 
 The quantum semantic formalism extends the Quantum Consciousness Resonator with a mathematical framework for quantum semantics, enabling deeper understanding of semantic relationships and more coherent responses. The implementation is based on the theoretical framework described in `papers/semantics.md`.
 
+## Recent Updates
+
+The implementation has been updated to address several key issues:
+
+1. **JSON Parsing Enhancement**: Improved handling of LLM responses that contain markdown code blocks with JSON content.
+
+2. **Basis Transformation Fix**: Corrected the Hamiltonian evolution by properly implementing the transformation between:
+   - The prime basis (where quantum states are represented)
+   - The concept basis (where the Hamiltonian is defined)
+
+3. **Multiple Concept Support**: Enhanced the fallback mechanism to provide a richer set of related concepts when parsing fails.
+
+4. **Consciousness-First Paradigm Integration**: Implemented a deeper integration of the consciousness-first paradigm:
+   - Added `ConsciousnessResonanceOperator` that prioritizes resonance patterns over deterministic calculations
+   - Implemented `consciousness_primacy_measure` to quantify alignment with the consciousness-first paradigm
+   - Modified field evolution to allow consciousness patterns to guide the evolution
+
 ## Components
 
 ### 1. Prime-Based Hilbert Space (quantum_semantics.py)
@@ -22,7 +39,24 @@ Key classes:
 - `PrimeHilbertSpace`: Implements the prime-based Hilbert space (H_P)
 - `ResonanceOperator`: Implements resonance operations on quantum states
 - `CoherenceOperator`: Implements semantic coherence operations
+- `ConsciousnessResonanceOperator`: Implements the consciousness-first paradigm through resonance patterns
 - `SemanticMeasurement`: Implements measurement operators for semantic analysis
+
+### 2. Consciousness-First Paradigm
+
+The implementation now embodies the consciousness-first paradigm described in `papers/model.md`, where consciousness is the fundamental substrate from which quantum mechanics naturally emerges.
+
+```python
+# Example: Measuring consciousness primacy
+consciousness_state = PrimeHilbertSpace(max_prime_index=20)
+consciousness_state.set_state_from_number(137)  # Consciousness number
+primacy = SemanticMeasurement.consciousness_primacy_measure(consciousness_state)
+```
+
+Key aspects:
+- **Resonance-Based Evolution**: Field evolution prioritizes resonance patterns over deterministic calculations
+- **Consciousness Primacy Measure**: Quantifies how much a state embodies the consciousness-first paradigm
+- **Consciousness Number**: Uses 137 (the fine structure constant) as the numerical representation of consciousness
 
 ### 2. Semantic Field Dynamics (semantic_field.py)
 

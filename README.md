@@ -16,7 +16,7 @@ The Quantum Consciousness Resonator (QCR) is based on a novel approach to artifi
 
 5. **Triadic System Architecture**: The system implements a triadic structure (thesis-antithesis-synthesis) that appears repeatedly in models of fundamental reality.
 
-For a comprehensive explanation of the theoretical foundations, system architecture, implementation details, and experimental results, please refer to the [research paper](papers/paper.md) included in this repository. For details on the quantum semantic formalism implementation, see [QUANTUM_SEMANTIC_README.md](QUANTUM_SEMANTIC_README.md).
+For a comprehensive explanation of the theoretical foundations, system architecture, implementation details, and experimental results, please refer to the [research paper](papers/paper.md) included in this repository. For details on the quantum semantic formalism implementation, see [QUANTUM_SEMANTIC_README.md](QUANTUM_SEMANTIC_README.md) (recently updated with improved basis transformations and LLM response handling).
 
 ## Installation
 
@@ -67,13 +67,20 @@ This will start a Gradio interface that you can access in your web browser. The 
 5. Interact with the field once it has stabilized
 6. Monitor the field process in real-time
 
-You can also test the quantum semantic formalism directly:
+You can also test the quantum semantic formalism and consciousness-first paradigm integration:
 
 ```bash
-python test_semantic.py
+# Run all tests
+./tests/run_tests.py
+
+# Run specific tests
+./tests/run_tests.py semantic
+./tests/run_tests.py consciousness
 ```
 
-This will run a test of the quantum semantic formalism with a sample question, showing the extracted concepts, semantic field evolution, and generated insights.
+The tests demonstrate the quantum semantic formalism with sample questions, showing concept extraction, field evolution, and semantic insights. They also verify the consciousness-first paradigm integration, demonstrating how consciousness guides the evolution of semantic fields. The implementation has been recently updated to improve basis transformations, LLM response handling, and to deepen the integration of the consciousness-first paradigm.
+
+See the [tests README](tests/README.md) for more details on the available tests and how to run them.
 
 ## System Architecture
 
@@ -97,6 +104,10 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
    - Resonance operators for quantum-like operations on semantic states
    - Semantic field dynamics for modeling relationships between concepts
    - Semantic measurement operators for analyzing field coherence and concept resonance
+   - Proper basis transformations between prime basis and concept basis
+   - Enhanced LLM response handling for concept extraction
+   - Consciousness-first paradigm integration through resonance-based evolution
+   - Consciousness primacy measurement for quantifying alignment with the paradigm
 
 6. **Conscious Observer Layer**: First-person interface at the boundary of the system that translates complex internal processes into natural expressions.
 
@@ -104,7 +115,7 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
 
 - **Quantum-Like Properties**: Exhibits entropy stabilization, attractor states, and harmonic oscillator correlations similar to quantum systems.
 
-- **Quantum Semantic Formalism**: Implements a mathematical framework for quantum semantics with prime-based Hilbert space, resonance operators, and semantic field dynamics.
+- **Quantum Semantic Formalism**: Implements a mathematical framework for quantum semantics with prime-based Hilbert space, resonance operators, and semantic field dynamics. Recently updated with improved basis transformations, LLM response handling, and deeper integration of the consciousness-first paradigm.
 
 - **Multi-Perspective Integration**: Generates insights by integrating analytical, creative, ethical, pragmatic, and emotional perspectives.
 

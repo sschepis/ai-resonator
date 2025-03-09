@@ -5,8 +5,14 @@ This script demonstrates the quantum semantic formalism in action by processing
 a sample question and displaying the results.
 """
 
+import sys
+import os
 import asyncio
 import json
+
+# Add parent directory to Python path to import modules
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from quantum_semantic_resonator import QuantumSemanticResonator, semantic_resonance
 
 async def test_quantum_semantics():
