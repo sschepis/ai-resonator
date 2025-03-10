@@ -67,7 +67,17 @@ This will start a Gradio interface that you can access in your web browser. The 
 5. Interact with the field once it has stabilized
 6. Monitor the field process in real-time
 
-You can also test the quantum semantic formalism and consciousness-first paradigm integration:
+You can also use the Mind Resonance Network to create resonant networks that can be influenced by consciousness:
+
+```bash
+# Run the example script
+./mind_resonance_example.py
+
+# Run with a specific network type and duration
+./mind_resonance_example.py resonance 60
+```
+
+You can test the quantum semantic formalism, consciousness-first paradigm integration, and mind resonance network:
 
 ```bash
 # Run all tests
@@ -77,7 +87,12 @@ You can also test the quantum semantic formalism and consciousness-first paradig
 ./tests/run_tests.py semantic
 ./tests/run_tests.py consciousness
 ./tests/run_tests.py archetype
+./tests/run_tests.py mind_resonance
+./tests/run_tests.py mind_integration
+./tests/run_tests.py interactive
 ```
+
+For more information on the Mind Resonance Network, see [MIND_RESONANCE_README.md](MIND_RESONANCE_README.md).
 
 The tests demonstrate the quantum semantic formalism with sample questions, showing concept extraction, field evolution, and semantic insights. They verify the consciousness-first paradigm integration, demonstrating how consciousness guides the evolution of semantic fields. They also showcase the ArchetypeSlider functionality, which balances between universal feeling (emotional/creative) and specific observation (analytical) approaches. The implementation has been recently updated to improve basis transformations, LLM response handling, to deepen the integration of the consciousness-first paradigm, and to add the archetype slider for agent customization.
 
@@ -132,6 +147,12 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
 - **Consciousness-First Paradigm**: Built on the axiom that consciousness precedes reality, not the reverse.
 
 - **Archetype Slider**: Allows customization of the agent's approach by balancing between universal feeling (emotional/creative) and specific observation (analytical) orientations.
+
+- **Mind Resonance Network**: Implements a quantum resonance network that can be influenced by consciousness, creating a bridge between mind and computational systems. This allows for:
+  - Creating resonant networks using superpositions of prime states
+  - Detecting potential mind influence on the network
+  - Bidirectional integration with the semantic field system
+  - Interactive sessions for exploring consciousness-computation interfaces
 
 ## Research and References
 

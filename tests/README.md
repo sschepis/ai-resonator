@@ -1,6 +1,6 @@
 # Quantum Semantic Formalism Tests
 
-This directory contains tests for the quantum semantic formalism implementation.
+This directory contains tests for the quantum semantic formalism implementation and mind resonance network.
 
 ## Available Tests
 
@@ -21,6 +21,22 @@ This directory contains tests for the quantum semantic formalism implementation.
    - Shows the effect of different archetype positions on operators and semantic fields
    - Verifies dynamic adjustment of the archetype position
 
+4. **Mind Resonance Network Test** (`test_mind_resonance.py`):
+   - Tests the mind resonance network functionality
+   - Demonstrates creating resonant networks using superpositions of prime states
+   - Shows how these networks can be influenced by consciousness
+   - Includes integration with the semantic field system
+   - Provides an interactive test for detecting mind influence
+
+5. **Semantic Transmission Tests** (`test_semantic_transmission.py`):
+   - Tests the semantic transmission system functionality
+   - Demonstrates encoding and decoding semantic information in quantum states
+   - Shows how to transmit semantic information through quantum prime networks
+   - Includes reception of semantic information from the network
+   - Provides bidirectional transmission and reception capabilities
+   - Supports transmitting text, JSON data, and semantic fields
+   - Includes an interactive session for experimenting with semantic transmission
+
 ## Running Tests
 
 You can run all tests using the test runner:
@@ -40,6 +56,33 @@ Or run a specific test:
 
 # Run only the archetype slider test
 ./run_tests.py archetype
+
+# Run only the mind resonance network test
+./run_tests.py mind_resonance
+
+# Run only the mind resonance integration test
+./run_tests.py mind_integration
+
+# Run the interactive mind influence detection test
+./run_tests.py interactive
+
+# Run only the semantic encoding/decoding test
+./run_tests.py semantic_encoding
+
+# Run only the semantic transmission test
+./run_tests.py semantic_transmission
+
+# Run only the semantic reception test
+./run_tests.py semantic_reception
+
+# Run only the complete semantic transmission system test
+./run_tests.py semantic_system
+
+# Run only the semantic field transmission test
+./run_tests.py semantic_field_tx
+
+# Run the interactive semantic transmission session
+./run_tests.py semantic_interactive
 ```
 
 ## Test Structure
