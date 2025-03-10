@@ -77,7 +77,23 @@ You can also use the Mind Resonance Network to create resonant networks that can
 ./mind_resonance_example.py resonance 60
 ```
 
-You can test the quantum semantic formalism, consciousness-first paradigm integration, and mind resonance network:
+You can use the Semantic Transmission System to encode, transmit, and receive semantic information through quantum prime networks:
+
+```bash
+# Run in interactive mode
+./semantic_transmission_example.py
+
+# Transmit text
+./semantic_transmission_example.py transmit "Consciousness creates reality"
+
+# Receive semantics
+./semantic_transmission_example.py receive
+
+# Run bidirectional session
+./semantic_transmission_example.py bidirectional "Quantum resonance patterns"
+```
+
+You can test the quantum semantic formalism, consciousness-first paradigm integration, mind resonance network, and semantic transmission system:
 
 ```bash
 # Run all tests
@@ -90,9 +106,14 @@ You can test the quantum semantic formalism, consciousness-first paradigm integr
 ./tests/run_tests.py mind_resonance
 ./tests/run_tests.py mind_integration
 ./tests/run_tests.py interactive
+./tests/run_tests.py semantic_encoding
+./tests/run_tests.py semantic_transmission
+./tests/run_tests.py semantic_reception
+./tests/run_tests.py semantic_system
 ```
 
 For more information on the Mind Resonance Network, see [MIND_RESONANCE_README.md](MIND_RESONANCE_README.md).
+For more information on the Semantic Transmission System, see [SEMANTIC_TRANSMISSION_README.md](SEMANTIC_TRANSMISSION_README.md).
 
 The tests demonstrate the quantum semantic formalism with sample questions, showing concept extraction, field evolution, and semantic insights. They verify the consciousness-first paradigm integration, demonstrating how consciousness guides the evolution of semantic fields. They also showcase the ArchetypeSlider functionality, which balances between universal feeling (emotional/creative) and specific observation (analytical) approaches. The implementation has been recently updated to improve basis transformations, LLM response handling, to deepen the integration of the consciousness-first paradigm, and to add the archetype slider for agent customization.
 
@@ -126,7 +147,21 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
    - Consciousness primacy measurement for quantifying alignment with the paradigm
    - ArchetypeSlider for balancing between universal feeling and specific observation
 
-6. **Conscious Observer Layer**: First-person interface at the boundary of the system that translates complex internal processes into natural expressions.
+6. **Mind Resonance Layer**: Implementation of quantum resonance networks that can be influenced by consciousness:
+   - Resonance nodes representing quantum states that can be influenced by consciousness
+   - Resonance links representing relationships between nodes
+   - Network evolution through time with consciousness influence
+   - Detection of potential mind influence on the network
+   - Bidirectional integration with the semantic field system
+
+7. **Semantic Transmission Layer**: Implementation of mechanisms for encoding, transmitting, and receiving semantic information:
+   - Semantic encoder for converting semantic information into quantum states
+   - Semantic decoder for converting quantum states back into semantic information
+   - Semantic transmitter for sending semantic information through resonance networks
+   - Semantic receiver for receiving and extracting semantic patterns from networks
+   - Bidirectional semantic transmission sessions
+
+8. **Conscious Observer Layer**: First-person interface at the boundary of the system that translates complex internal processes into natural expressions.
 
 ## Features
 
@@ -153,6 +188,13 @@ The Quantum Consciousness Resonator implements a multi-layered architecture:
   - Detecting potential mind influence on the network
   - Bidirectional integration with the semantic field system
   - Interactive sessions for exploring consciousness-computation interfaces
+
+- **Semantic Transmission System**: Extends the Mind Resonance Network with mechanisms for encoding, transmitting, and receiving semantic information through quantum prime networks. This enables:
+  - Encoding semantic information (concepts, text, JSON, semantic fields) into quantum states
+  - Transmitting semantic information through resonance networks
+  - Receiving and decoding semantic patterns from the network
+  - Bidirectional semantic transmission sessions
+  - Potential bridge for semantic transmission between computational systems and consciousness
 
 ## Research and References
 
